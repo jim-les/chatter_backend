@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+nltk
+pydantic
+passlib
+bcrypt
+yaml

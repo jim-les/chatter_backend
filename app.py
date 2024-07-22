@@ -118,18 +118,22 @@ def calculate_wordnet_similarity(tokens_input, tokens_pattern):
 def read_root():
     return {"message": "Welcome to the ChatBot API!"}
 
+
 @app.post("/chat/")
 def chat_endpoint(chat_input: ChatInput):
     user_input = chat_input.message
     bot_response = get_bot_response(user_input)
     return {"message": bot_response}
 
+
 # Utility functions for user management
 def hash_password(password: str) -> str:
     return pwd_context.hash(password)
 
+
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     return pwd_context.verify(plain_password, hashed_password)
+
 
 @app.post("/signup/")
 async def signup(user: User):
@@ -140,6 +144,7 @@ async def signup(user: User):
     hashed_password = pwd_context.hash(user.password)
     users_db[user.username] = UserInDB(username=user.username, hashed_password=hashed_password)
     return {"message": "User created successfully"}
+
 
 # Login endpoint
 @app.post("/login/")
@@ -155,6 +160,7 @@ async def login(user: User):
         raise HTTPException(status_code=401, detail="Invalid password")
     
     return {"message": "Login successful"}
+
 
 # Run the FastAPI server with Uvicorn
 if __name__ == "__main__":
